@@ -81,7 +81,36 @@ class Player(Character):
       else: self.enemy_attacks()
   def enemy_attacks(self):
     if self.enemy.do_damage(self): print "%s was slaughtered by %s!!!\nR.I.P." %(self.name, self.enemy.name)
- 
+  def sing(self):
+    if self.sing != 'singing': print "%s is singing & dancing like Michael Jackson." % self.name; self.tired()
+    else:
+      if randint(1, self.health + 5) > randint(1, self.enemy.health):
+        print "%s sings and escape from %s." % (self.name, self.enemy.name)
+        self.enemy = None
+        self.state = 'normal'
+      else: print "%s stop singing he feels tired" % (self.name, self.enemy.name); self.enemy_attacks()
+  def laugh(self):
+    if self.laugh != 'laughing': print "%s is laughing every insects things he is crazy." % self.name; self.tired()
+    else:
+      if randint(1, self.health + 5) > randint(1, self.enemy.health):
+        print "%s make the %s laugh and escape from %s." % (self.name, self.enemy.name)
+        self.enemy = None
+        self.state = 'normal'
+      else: print "%s stop laughing he feels tired" % (self.name, self.enemy.name); self.enemy_attacks()
+  def box(self):
+    if self.state != 'fight': print "%s swats the air, without notable results." % self.name; self.tired()
+    else:
+      if self.do_damage(self.enemy):
+        print "%s executes %s!" % (self.name, self.enemy.name)
+        self.enemy = None
+        self.state = 'normal'
+        if randint(0, self.health) < 10:
+          self.health = self.health + 1
+          self.health_max = self.health_max + 1
+          print "%s wants to punch in the face harder ans stronger!" % self.name
+      else: self.enemy_attacks()
+  def enemy_attacks(self):
+    if self.enemy.do_damage(self): print "%s was killed by %s R.I.P god bless you." %(self.name, self.enemy.name)
 Commands = {
   'quit': Player.quit,
   'help': Player.help,
@@ -90,6 +119,9 @@ Commands = {
   'explore': Player.explore,
   'flee': Player.flee,
   'attack': Player.attack,
+  'sing' : Player.sing,
+  'laugh' : Player.laugh,
+  'box' : Player.box,
   }
  
 p = Player()

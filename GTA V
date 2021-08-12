@@ -27,15 +27,15 @@ class Player(Character):
     self.health = 10
     self.health_max = 10
   def quit(self):
-    print "%s can't find the way back home, and dies of starvation.\nR.I.P." % self.name
+    print "%s died because he quit\nR.I.P. Why did you quit!" % self.name
     self.health = 0
   def help(self): print Commands.keys()
   def status(self): print "%s's health: %d/%d" % (self.name, self.health, self.health_max)
   def tired(self):
-    print "%s feels tired." % self.name
+    print "%s I feel tired please don't wake me up. Understand!" % self.name
     self.health = max(1, self.health - 1)
   def rest(self):
-    if self.state != 'normal': print "%s can't rest now!" % self.name; self.enemy_attacks()
+    if self.state != 'normal': print "%s can't rest now. Don't try to kill me!" % self.name; self.enemy_attacks()
     else:
       print "%s rests." % self.name
       if randint(0, 1):
@@ -46,10 +46,10 @@ class Player(Character):
       else:
         if self.health < self.health_max:
           self.health = self.health + 1
-        else: print "%s slept too much." % self.name; self.health = self.health - 1
+        else: print "%s slept too much. Don't try to kill me!" % self.name; self.health = self.health - 1
   def explore(self):
     if self.state != 'normal':
-      print "%s is too busy right now!" % self.name
+      print "%s is too busy right now. Don't try to kill me!" % self.name
       self.enemy_attacks()
     else:
       print "%s explores a twisty passage." % self.name
@@ -80,7 +80,7 @@ class Player(Character):
           print "%s feels stronger!" % self.name
       else: self.enemy_attacks()
   def enemy_attacks(self):
-    if self.enemy.do_damage(self): print "%s was slaughtered by %s!!!\nR.I.P." %(self.name, self.enemy.name)
+    if self.enemy.do_damage(self): print "%s was killed by %s!!!\nR.I.P. God bless you" %(self.name, self.enemy.name)
   def sing(self):
     if self.sing != 'singing': print "%s is singing & dancing like Michael Jackson." % self.name; self.tired()
     else:
@@ -141,3 +141,4 @@ while(p.health > 0):
         break
     if not commandFound:
       print "%s I don't understand say it properly. Come on! Say it." % p.name
+

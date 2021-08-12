@@ -107,7 +107,7 @@ class Player(Character):
         if randint(0, self.health) < 10:
           self.health = self.health + 1
           self.health_max = self.health_max + 1
-          print "%s wants to punch in the face harder ans stronger!" % self.name
+          print "%s wants to punch in the face harder and stronger!" % self.name
       else: self.enemy_attacks()
   def enemy_attacks(self):
     if self.enemy.do_damage(self): print "%s was killed by %s R.I.P god bless you." %(self.name, self.enemy.name)
